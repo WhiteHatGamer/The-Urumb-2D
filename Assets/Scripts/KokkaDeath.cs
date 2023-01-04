@@ -9,6 +9,12 @@ public class KokkaDeath : MonoBehaviour
     [SerializeField] Text FinalScore;
     public GameObject player;
     public Vector3 pos;
+    private void Awake()
+    {
+        player.SetActive(true);
+        GameOver.SetActive(false);
+        CurrentScore.gameObject.SetActive(true);
+    }
     public void SetGameOver()
     {
         player.SetActive(false);
@@ -26,16 +32,16 @@ public class KokkaDeath : MonoBehaviour
     }
     void Update()
     {
-        if (tempscore<pos.z)
+        if (tempscore<pos.x)
         {
-            pos.z=tempscore=(int)pos.z;
-            CurrentScore.text=pos.z.ToString();
+            pos.x=tempscore=(int)pos.x;
+            CurrentScore.text="SCORE: " + pos.x.ToString();
         }
         pos = player.transform.position;
-        if ( (pos.y<-9) )//|| (health<=0)
+        if ( (pos.y<-20) )//|| (health<=0)
         {
             SetGameOver();
-            FinalScore.text = CurrentScore.text;
+            FinalScore.text = "FINAL " + CurrentScore.text;
         }
     }
 }
